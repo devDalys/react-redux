@@ -1,12 +1,5 @@
-const FETSH_USERS = 'FETCH_USERS';
-const FETSH_USERS_SUCCES = 'FETCH_USERS';
-const FETSH_USERS = 'FETCH_USERS';
+import { UserState, UsersAction, action } from "../../types/userTypes"
 
-interface UserState{
-  users: any[];
-  loading: boolean;
-  error: null | string
-}
 
 const initialState:UserState = {
   users: [],
@@ -14,9 +7,15 @@ const initialState:UserState = {
   error: null
 }
 
-export const userReducer = (state = initialState,action):UserState => {
+
+export const userReducer = (state = initialState,action:action):UserState => {
   switch(action.type){
-    case 'FETCH_USERS':
+    case UsersAction.FETCH_USERS:
       return {loading: true, error: null, users: []}
+      case UsersAction.FETCH_USERS_SUCCESS:
+      return {loading: false, error: null, users: action.payload}
+      case UsersAction.FETCH_USERS_ERROR:
+      return {loading: false, error: state.error, users: []}
+      default: return state
   }
 }
