@@ -1,7 +1,6 @@
 import { Alert, AlertTitle, LinearProgress } from '@mui/material';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
 import { fetchUsers } from '../../store/ActionCreator/user';
 import Table from '@mui/material/Table';
@@ -28,7 +27,7 @@ const UserList: React.FC = () => {
 					{error}
 				</Alert>
 			)}
-			{
+			{!error &&
 				 <TableContainer component={Paper}>
 				 <Table sx={{ minWidth: 650 }} aria-label="simple table">
 					 <TableHead>
@@ -43,7 +42,7 @@ const UserList: React.FC = () => {
 					 <TableBody>
 						 {users.map((user) => (
 							 <TableRow
-								 key={user.name}
+								 key={user.id}
 								 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 							 >
 								 <TableCell component="th" scope="row">
